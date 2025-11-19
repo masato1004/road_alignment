@@ -15,3 +15,8 @@
 *.mkv
 *.mp3
 *.wav
+*.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

@@ -56,21 +56,22 @@ if __name__ == "__main__":
         else:
             cropped_image = image_cropper(image, int(image.shape[0]//2), image.shape[0], 0, image.shape[1], 1)  # crop bottom half
         
-        blurred_image = cv2.GaussianBlur(cropped_image, (5, 5), 0)
+        blurred_image = cv2.GaussianBlur(cropped_image, (3, 3), 200, 200)
         print(f"Image shape: {cropped_image.shape}")
         
         # edge detection using Canny
-        edges = cv2.Canny(blurred_image, 50, 150)
-        im_lines = cv2.HoughLines(edges, rho=1.5, theta=np.pi/360, threshold=100)
+        edges = cv2.Canny(blurred_image, 50, 130)
+        im_lines = cv2.HoughLines(edges, rho=1.5, theta=np.pi/180, threshold=70)
         positive_lines = []
         negative_lines = []
-        for line in im_lines:
-            rho, theta = line[0]
-            if np.sin(theta) < 0.99:
-                if theta < np.pi / 2:
-                    positive_lines.append(line)
-                else:
-                    negative_lines.append(line)
+        if im_lines is not None:
+            for line in im_lines:
+                rho, theta = line[0]
+                if np.sin(theta) < 0.99:
+                    if theta < np.pi / 2:
+                        positive_lines.append(line)
+                    else:
+                        negative_lines.append(line)
             
         if len(positive_lines) > 0:
             # for line in positive_lines:
