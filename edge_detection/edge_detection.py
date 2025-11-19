@@ -105,3 +105,5 @@ if __name__ == "__main__":
         cv2.imshow("Canny Edges", edges)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
+        # cv2.imwrite("processed_images/vp_" + os.path.basename(file), cropped_image)
+        # cv2.imwrite("processed_images/edges_" + os.path.basename(file), edges)
